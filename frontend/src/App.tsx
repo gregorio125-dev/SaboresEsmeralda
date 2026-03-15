@@ -10,7 +10,9 @@ import Testimonials from "./components/sections/Testimonials";
 import WhyChooseUs from "./components/sections/WhyChooseUs";
 import CrearProducto from "./pages/CrearProducto";
 import Catalogo from "./pages/Catalogo";
+import Carrito from "./pages/Carrito";
 import { ProductProvider } from "./context/ProductContext";
+import { CartProvider } from "./context/CartContext";
 
 function Home() {
   return (
@@ -27,6 +29,7 @@ function Home() {
 function App() {
   return (
     <ProductProvider>
+      <CartProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -35,9 +38,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/crear-producto" element={<CrearProducto />} />
+          <Route path="/carrito" element={<Carrito />} />
         </Routes>
         <Footer />
       </BrowserRouter>
+      </CartProvider>
     </ProductProvider>
   );
 }
