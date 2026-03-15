@@ -32,33 +32,35 @@ const Register = () => {
     setLoading(true);
 
     try {
-      // Validaciones básicas
-      if (!formData.nombre || !formData.correo || !formData.password || !formData.direccion || !formData.edad) {
-        setError("Por favor completa todos los campos");
-        setLoading(false);
-        return;
-      }
+
+      const body = {
+        name: formData.nombre,
+        email: formData.correo,
+        password: formData.password,
+        direccion: formData.direccion,
+        edad: Number(formData.edad),
+        rol_id: 1,
+        role: formData.rol
+      };
 
       const response = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(body),
       });
 
       const data = await response.json();
 
-      if (!response.ok || data.error) {
-        setError(data.error || "Error al registrarse");
-        return;
-      }
+        if (!response.ok || data.error) {
+          setError(data.error || "Error al registrarse");
+          return;
+        }
 
-      // Mostrar mensaje de éxito
-      alert("¡Registro exitoso! Ahora inicia sesión");
-
-      // Redirigir al login
+      alert("¡Registro exitoso!");
       navigate("/login");
+
     } catch (err) {
       setError("Error al conectar con el servidor");
       console.error(err);

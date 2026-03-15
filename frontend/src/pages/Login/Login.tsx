@@ -25,8 +25,8 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          correo,
-          password,
+          email: correo,
+          password: password
         }),
       });
 
